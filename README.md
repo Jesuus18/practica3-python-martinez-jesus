@@ -32,11 +32,14 @@ Abrimos PowerShell en la carpeta del repositorio y creamos el entorno con Python
 ```powershell
 py -3.12 -m venv .venv
 .\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-python -m jupyterlab notebooks/practica3_python.ipynb
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m ipykernel install --user --name practica3-python --display-name "Python 3.12 (Practica 3)"
+.\.venv\Scripts\python.exe -m jupyterlab notebooks/practica3_python.ipynb
 ```
 
-En JupyterLab seleccionamos el kernel del entorno y usamos **Kernel > Restart Kernel and Run All Cells**. Al terminar guardamos el notebook para conservar las salidas.
+Registramos el entorno con un nombre reconocible para evitar seleccionar el Python de otra instalación. En JupyterLab seleccionamos **Python 3.12 (Practica 3)** y usamos **Kernel > Restart Kernel and Run All Cells**. La primera celda comprueba la versión de Python. Al terminar guardamos el notebook para conservar las salidas.
+
+Si PowerShell bloquea `Activate.ps1`, continuamos con los comandos que llaman directamente a `.\.venv\Scripts\python.exe`, sin cambiar la política de ejecución. Si movemos el repositorio o recreamos el entorno, repetimos el registro del kernel para actualizar su ruta.
 
 El notebook trabaja desde `notebooks/`, con rutas relativas a `../data/`, `../src/` y `../outputs/`. Los ejercicios 15 y 18 generan los dos CSV de resultados.
 
